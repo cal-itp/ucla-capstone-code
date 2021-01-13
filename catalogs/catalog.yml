@@ -1,0 +1,8 @@
+metadata:
+  version: 1
+sources:
+  measures: 
+    driver: csv
+    description: description of funding for each active lost, maintained by hand in Google drive and loaded dynamically into analysis code. 
+    args:
+      urlpath: https://docs.google.com/spreadsheets/d/1Lf1Ebdbk8_AB1D5oJm3MZIBgL0u8cmG4TKoBfGdBGw0/gviz/tq?tqx=out:csv&sheet=measures
