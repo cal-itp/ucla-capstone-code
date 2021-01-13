@@ -6,3 +6,9 @@ sources:
     description: description of funding for each active lost, maintained by hand in Google drive and loaded dynamically into analysis code. 
     args:
       urlpath: https://docs.google.com/spreadsheets/d/1Lf1Ebdbk8_AB1D5oJm3MZIBgL0u8cmG4TKoBfGdBGw0/gviz/tq?tqx=out:csv&sheet=measures
+      
+  cdtfa: 
+    driver: csv
+    description: static quarterly funding distributions of special district taxes (including losts) from CDTFA as of Jan 13 2021: https://www.cdtfa.ca.gov/dataportal/dataset.htm?url=LRBQtrDistDistrictTax#
+    args:
+      urlpath: https://docs.google.com/spreadsheets/d/1E3GtCntlMmTGAKaP7U0VDa_UyPSnjW2M82z2Qbhc-Q4/gviz/tq?tqx=out:csv&sheet=LRBQtrDistDistrictTaxJan13_2021
