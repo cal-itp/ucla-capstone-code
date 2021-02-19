@@ -9,6 +9,13 @@ sources:
       
   cdtfa: 
     driver: csv
-    description: static quarterly funding distributions of special district taxes (including losts) from CDTFA as of Jan 13 2021: https://www.cdtfa.ca.gov/dataportal/dataset.htm?url=LRBQtrDistDistrictTax#
+    description: "static quarterly funding distributions of special district taxes (including losts) from CDTFA as of Jan 13 2021: https://www.cdtfa.ca.gov/dataportal/dataset.htm?url=LRBQtrDistDistrictTax#"
     args:
       urlpath: https://docs.google.com/spreadsheets/d/1E3GtCntlMmTGAKaP7U0VDa_UyPSnjW2M82z2Qbhc-Q4/gviz/tq?tqx=out:csv&sheet=LRBQtrDistDistrictTaxJan13_2021
+      
+  ltf: 
+    driver: csv
+    description: "static quarterly funding distributions of the Local Transportation Fund (part of TDA) from CDTFA as of Feb 10 2021: www.cdtfa.ca.gov/dataportal/dataset.htm?url=LRBQtrDistCountyLTFTax#"
+    args:
+      urlpath: https://docs.google.com/spreadsheets/d/1uyTS4BYF2qi8XHmCBLhkULQiuAZqTQfOjQ_q1KEIYeM/gviz/tq?tqx=out:csv&sheet=CDTFAQtrDistCountyLTFTax
+      
