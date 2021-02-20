@@ -9,6 +9,7 @@ sources:
       
   cdtfa: 
     driver: csv
+<<<<<<< HEAD
     description: "static quarterly funding distributions of special district taxes (including losts) from CDTFA as of Jan 13 2021: https://www.cdtfa.ca.gov/dataportal/dataset.htm?url=LRBQtrDistDistrictTax#"
     args:
       urlpath: https://docs.google.com/spreadsheets/d/1E3GtCntlMmTGAKaP7U0VDa_UyPSnjW2M82z2Qbhc-Q4/gviz/tq?tqx=out:csv&sheet=LRBQtrDistDistrictTaxJan13_2021
@@ -19,3 +20,14 @@ sources:
     args:
       urlpath: https://docs.google.com/spreadsheets/d/1uyTS4BYF2qi8XHmCBLhkULQiuAZqTQfOjQ_q1KEIYeM/gviz/tq?tqx=out:csv&sheet=CDTFAQtrDistCountyLTFTax
       
+=======
+    description: static quarterly funding distributions of special district taxes (including losts) from CDTFA as of Jan 13 2021 https://www.cdtfa.ca.gov/dataportal/dataset.htm?url=LRBQtrDistDistrictTax#
+    args:
+      urlpath: https://docs.google.com/spreadsheets/d/1E3GtCntlMmTGAKaP7U0VDa_UyPSnjW2M82z2Qbhc-Q4/gviz/tq?tqx=out:csv&sheet=LRBQtrDistDistrictTaxJan13_2021
+      
+  providers: 
+    driver: csv
+    description: Cal-ITP Transit Providers dataset as of Dec 2020. Includes provider name, primary county/counties served, select data from the NTD.
+    args:
+      urlpath: https://docs.google.com/spreadsheets/d/1x1EDip7_OkgW9bQ2e6f0oMpBj34BlxYWipkxMwM_5LE/gviz/tq?tqx=out:csv&sheet=providers
+>>>>>>> bff5ee17e50ed7486ee0b0a2c20b29ed09f6aeda
