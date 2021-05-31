@@ -25,7 +25,7 @@ Project Organization
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    ├── reports            <- Code to generate county-level fact sheets using R Markdown. Run notebook 7 to generate charts.
     │   └── figures        <- Generated graphics and figures to be used in reporting
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.

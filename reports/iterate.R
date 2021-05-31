@@ -29,4 +29,4 @@ runs <- tibble(
 # iterate render() along the tibble of parameters and file names
 runs %>%
     select(output_file = filename, params) %>%
-      pwalk(rmarkdown::render, input = "simple-factsheet.Rmd", output_dir = "factsheets")
+      pwalk(rmarkdown::render, input = "lost-factsheet.Rmd", output_dir = "factsheets")
