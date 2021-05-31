@@ -24,3 +24,9 @@ sources:
     description: 'Cal-ITP Transit Providers dataset as of Dec 2020. Includes provider name, primary county/counties served, select data from the NTD.'
     args:
       urlpath: https://docs.google.com/spreadsheets/d/1x1EDip7_OkgW9bQ2e6f0oMpBj34BlxYWipkxMwM_5LE/gviz/tq?tqx=out:csv&sheet=providers
+
+  total_tax_rate: 
+    driver: csv
+    description: basic info about county tax rates and whether a county contains jurisdictions nearing California's 10.25 percent cap
+    args:
+      urlpath: https://docs.google.com/spreadsheets/d/1l-5lFoOkYqHFL3fpeXIHFmMfYeQauZjDa7CPHGwzBT8/gviz/tq?tqx=out:csv&sheet=Sheet1
