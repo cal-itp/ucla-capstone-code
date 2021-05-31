@@ -25,7 +25,7 @@ if you are using anaconda/miniconda, the environment *must*
   ```{r eval=FALSE}
   knitr::opts_chunk$set(echo = TRUE)
   Sys.setenv(RETICULATE_MINICONDA_ENABLED=FALSE)
-  reticulate::use_condaenv("knitr")
+  reticulate::use_condaenv("pd1")
   ```
 
   ```{r setup, include=FALSE}

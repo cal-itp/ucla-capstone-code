@@ -27,7 +27,7 @@
 \usepackage{amssymb}          % for itemized list styles
 
 % document setup
-\definecolor{urbnblue}{HTML}{1696D2}    % defines the Urban Institute blue color
+\definecolor{uclablue}{HTML}{2774AE}    % defines the Urban Institute blue color
 \usepackage{enumitem}                   % bullet alignment
 \setlist[2]{nosep}                      % sets the itemsep and parsep for all level two lists to 0
 \setenumerate{nosep}                    % sets no itemsep for enumerate lists only
@@ -35,11 +35,11 @@
 \usepackage[hang,flushmargin]{footmisc} % don't indent footnotes
 \usepackage[document]{ragged2e}         % ragged right
 \usepackage[none]{hyphenat}             % disable work breaks
-\renewcommand\thefootnote{\textcolor{urbnblue}{\arabic{footnote}}} % change the color of the footnote indicator
+\renewcommand\thefootnote{\textcolor{uclablue}{\arabic{footnote}}} % change the color of the footnote indicator
 \hypersetup{
   colorlinks,
-  linkcolor=urbnblue,
-  urlcolor=urbnblue,
+  linkcolor=uclablue,
+  urlcolor=uclablue,
 }
 \usepackage{parskip}
 \setlength{\parskip}{0.1in}               % set paragraph spacing
@@ -53,23 +53,64 @@
   \end{figure}
 }
 
+% Cal-ITP logo
+\newcommand{\calitplogo}[0]{
+  \begin{figure}
+    \hspace{-0.12in}
+    \includegraphics[width=1.5in]{design/calitp_logo_MAIN}
+    \label{fig:boat1}
+  \end{figure}
+}
+
+% UCLA ITS logo
+\newcommand{\itslogo}[0]{
+  \begin{figure}
+    \hspace{-0.12in}
+    \includegraphics[width=2.0in]{design/calitp_logo_MAIN}
+    \includegraphics[width=1.3in,right]{design/its}
+    \label{fig:boat1}
+  \end{figure}
+}
+
+% % contact information
+% \newcommand{\contactinfo}[0]{
+%   \thispagestyle{empty}
+%   \begin{tikzpicture}[remember picture, overlay]
+%     \draw 
+%       node[anchor=south west, minimum height=0.5in, minimum width=8.5in, text width=8in] at ($(current page.south west) + (0.75in,0.13in)$) 
+%       {\color{gray}Urban Institute \space
+%       \color{uclablue}$\blacksquare$ \space
+%       \color{gray}500 L'Enfant Plaza \space
+%       \color{uclablue}$\blacksquare$ \space
+%       \color{gray}Washington, DC 20024 \space
+%       \color{uclablue}$\blacksquare$ \space
+%       \color{gray}202.833.7200 \space
+%       \color{uclablue}$\blacksquare$ \space
+%       \textcolor{uclablue}{www.urban.org}};
+%   \end{tikzpicture}
+% }
+
 % contact information
 \newcommand{\contactinfo}[0]{
   \thispagestyle{empty}
   \begin{tikzpicture}[remember picture, overlay]
     \draw 
       node[anchor=south west, minimum height=0.5in, minimum width=8.5in, text width=8in] at ($(current page.south west) + (0.75in,0.13in)$) 
-      {\color{gray}Urban Institute \space
-      \color{urbnblue}$\blacksquare$ \space
-      \color{gray}500 L'Enfant Plaza \space
-      \color{urbnblue}$\blacksquare$ \space
-      \color{gray}Washington, DC 20024 \space
-      \color{urbnblue}$\blacksquare$ \space
-      \color{gray}202.833.7200 \space
-      \color{urbnblue}$\blacksquare$ \space
-      \textcolor{urbnblue}{www.urban.org}};
+      {\color{gray}UCLA ITS \space
+      \color{uclablue}$\blacksquare$ \space
+      \textcolor{uclablue}{https://www.its.ucla.edu/} \space \space \space
+      % \color{black}$\blacksquare$ \space
+      % \begin{flushright}
+      \color{gray}Cal–ITP \space
+      \color{uclablue}$\blacksquare$ \space
+      \textcolor{uclablue}{https://www.calitp.org/}};
   \end{tikzpicture}
 }
+
+      %       node[anchor=south west, minimum height=0.5in, minimum width=8.5in, text width=8in] at ($(current page.south west) + (0.75in,0.13in)$) 
+      % {\color{gray}Cal–ITP \space
+      % \color{uclablue}$\blacksquare$ \space
+      % \textcolor{uclablue}{https://www.calitp.org/}};
 
 % titles (14pt font)
 \newcommand{\urbntitle}[1]{
@@ -81,7 +122,7 @@
 % subtitles (12pt font)
 \newcommand{\urbnsubtitle}[1]{
   \begin{center}
-    \Large{\textcolor{urbnblue}{#1}}
+    \Large{\textcolor{uclablue}{#1}}
     \vspace{0.25in}    
   \end{center}
 }
@@ -101,12 +142,12 @@
 
 % heading 2
 \newcommand{\urbnheadingtwo}[1]{
-  \textbf{\textcolor{urbnblue}{#1}}
+  \textbf{\textcolor{uclablue}{#1}}
 }
 
 % figure label
 \newcommand{\urbnfigurenumber}[1]{
-  \textcolor{urbnblue}{\tiny{\\} \normalsize{FIGURE #1 \\}}
+  \textcolor{uclablue}{\tiny{\\} \normalsize{FIGURE #1 \\}}
 }
 
 % figure title
@@ -126,7 +167,7 @@
 
 % table label
 \newcommand{\urbntablenumber}[1]{
-  \textcolor{urbnblue}{\tiny{\\} \normalsize{TABLE #1 \\}}
+  \textcolor{uclablue}{\tiny{\\} \normalsize{TABLE #1 \\}}
 }
 
 % table title
@@ -140,10 +181,10 @@
 }
 
 % bullet points
-\renewcommand{\labelitemi}{\color{urbnblue}\tiny$\blacksquare$}   % blue square
-\renewcommand{\labelitemii}{\color{urbnblue}\tiny$\blacksquare$}  % blue square
-\renewcommand{\labelitemiii}{\color{urbnblue}\tiny$\blacksquare$} % blue square
-\renewcommand{\labelitemiv}{\color{urbnblue}\tiny$\blacksquare$}  % blue square
+\renewcommand{\labelitemi}{\color{uclablue}\tiny$\blacksquare$}   % blue square
+\renewcommand{\labelitemii}{\color{uclablue}\tiny$\blacksquare$}  % blue square
+\renewcommand{\labelitemiii}{\color{uclablue}\tiny$\blacksquare$} % blue square
+\renewcommand{\labelitemiv}{\color{uclablue}\tiny$\blacksquare$}  % blue square
 
 \newenvironment{urbnbullets}
 {\begin{itemize}[leftmargin=*,labelindent=0.25in,labelsep=0.1875in]

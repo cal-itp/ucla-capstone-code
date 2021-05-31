@@ -1,0 +1,186 @@
+---
+header-includes:
+- \input{preamble.tex}
+fontsize: 10pt
+output: pdf_document
+sansfont: Lato
+font:     Lato
+geometry: "left=1in,right=1in,top=0.35in,bottom=0.6in"
+urlcolor: #169d62
+params:
+    county: "Los Angeles"
+---
+
+\raggedright
+
+```{r rmarkdown-setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(dev = "cairo_pdf")
+options(knitr.kable.NA = "")
+options(kableExtra.latex.load_packages = FALSE)
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(urbnthemes)
+library(reticulate)
+reticulate::use_condaenv("pd1")
+
+set_urbn_defaults(style = "print")
+```
+
+<!-- \urbnlogo{} -->
+<!-- \calitplogo{} -->
+\itslogo{}
+
+
+\urbntitle{`r paste(params$county,"County Transportation Local Option Sales Tax Snapshot", sep=" ")`}
+\urbnsubtitle{`r paste("Estimated LOST Funding Distribution and Overall Transit Funding Sources in",params$county,"County", sep=" ")`}
+\urbnauthors{Natalie Amberg, Eric Dasmalchi}
+
+```{python}
+import pandas as pd
+import numpy as np
+import intake
+
+cat = intake.open_catalog('../catalogs/catalog.yml')
+measures = cat.measures.read().set_index('cdtfa_id')
+measures['pct_transit_unspecified'] = abs(measures['total_pct_transit'].fillna(0) -
+                                       measures['pct_transit_capital'].fillna(0) -
+                                      measures['pct_transit_ops'].fillna(0)).round(0)
+                                      
+def county_lost_narrative(measures_df, county_name):
+    measure_info = ''
+    county_df = measures_df[measures_df['county_name'] == county_name]
+    for _ix, row in county_df.iterrows():
+        measure_info += f'* {row.ballot_designation}, enacted {int(row.year)}, {row.lost_rate * 100} percent sales tax\n'
+    return measure_info
+```   
+
+```{r}
+py$county <- params$county
+```
+```{python}
+from scipy import stats
+def county_lost_info(measures_df, county_name):
+    
+    measures_grouped = measures.groupby('county_name')
+    lost_sums = measures_grouped.sum()
+    num_losts = measures_grouped.size()
+    county_total_rate = lost_sums.loc[county_name, 'lost_rate'] * 100
+    if county_total_rate % 1 == 0:
+        county_total_rate = int(county_total_rate)
+    rate_percentile = int(stats.percentileofscore(lost_sums['lost_rate'] * 100, county_total_rate))
+    transit_percentile = int(stats.percentileofscore(lost_sums['total_pct_transit']/num_losts,
+                            lost_sums.loc[county_name,'total_pct_transit'] / num_losts[county_name]))
+    
+    measure_info = f'''\
+The total sales tax rate of all LOSTs in {county_name} County is {county_total_rate} percent. \
+This is higher than the total rate in {rate_percentile} percent of California counties with active LOSTs. \
+LOSTs in {county_name} County dedicate about {int(lost_sums.loc[county_name,'total_pct_transit'] / num_losts[county_name]*100)} \
+percent of their revenue to public transit, a larger proportion than {transit_percentile} percent of counties.\
+    '''
+    return measure_info
+```
+
+This fact sheet gives a brief overview of LOST funding in `r params$county` County and how it compares to other California counties with active LOSTs. It also includes some facts about transit funding in the county overall.
+
+\urbnheadingone{Transportation LOST Info}
+
+```{python, results='asis'}
+print(county_lost_info(measures, county))
+```
+
+\urbnheadingtwo{Active LOST Measures}
+
+```{python, results='asis'}
+print(county_lost_narrative(measures, county))
+```
+
+<!-- \urbnheadingtwo{Approximate LOST Funding Distribution} -->
+\urbnfigurenumber{1}
+\urbnfiguretitle{Approximate LOST Funding Distribution}
+\graphicspath{ {./figures/} }
+\includegraphics[width=5.5in]{`r paste(params$county,"_lost", sep="")`}
+
+\urbnsource{LOST Measure text, expenditure plans}
+\urbnnote{See methodology section of report for more details}
+
+\newpage{}
+\urbnheadingone{Transit Funding Info}
+<!-- Text could go here... -->
+
+This figure gives a broad overview of operating funding sources for all transit operators within `r params$county` County, based on data from the California State Controller's Office. Funding received from LOSTs generally falls in the "Local" category.
+
+\urbnfigurenumber{2}
+\urbnfiguretitle{Countywide Transit Funding Sources (2019)}
+\graphicspath{ {./figures/} }
+\includegraphics[width=5.5in]{`r paste(params$county,"_sco", sep="")`}
+
+\urbnsource{California State Controller's Office}
+\urbnnote{See methodology section of report for more details}
+
+
+
+
+<!-- This factsheet has powerful footnote\footnote{Don't worry about numbering!} capabilities.  -->
+
+<!-- \begin{urbnbullets} -->
+<!--   \item Bulleted list -->
+<!--   \item Bulleted list -->
+<!--   \item Bulleted list -->
+<!-- \end{urbnbullets} -->
+
+<!-- \begin{urbnenumerate} -->
+<!--   \item Numbered list -->
+<!--   \item Numbered list -->
+<!--   \item Numbered list -->
+<!-- \end{urbnenumerate} -->
+
+\contactinfo{}
+
+<!-- \newpage{} -->
+<!-- \newgeometry{left=1in,right=1in,top=1in,bottom=1.5in} -->
+
+<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
+
+<!-- Here's a second instance\footnote{Footnotes on the second page appear below the funder statement} of footnotes. -->
+<!-- several features. -->
+
+<!-- \vspace{5mm} -->
+<!-- \urbntablenumber{1} -->
+<!-- \urbntabletitle{An Informative Table Title in Title Case} -->
+<!-- \urbntablesubtitle{An informative table subtitle in sentence case} -->
+
+<!-- ```{r echo=FALSE,  fig.width =7 , fig.height =2} -->
+<!-- # arbitrary data to demonstrate a table -->
+<!-- data <- tribble(~Industry, ~workers, ~increase, -->
+<!--   "Retail trade", 1000, 10, -->
+<!--   "Accomodation and food services", 989, 10, -->
+<!--   "Manufacturing", 54, 10, -->
+<!--   "Health care", 54, 10, -->
+<!--   "Administrative services", 10, 10, -->
+<!--   "Construction", 12, 10, -->
+<!--   "Male, unmarried or spouse not present", 145, 10, -->
+<!--   "Female, unmarried or spouse not present", 88, 10, -->
+<!--   "Married couple", 89, 10) -->
+
+<!-- kable(data, format = "latex", booktabs = TRUE, -->
+<!--       col.names = c(" ", "Thousands of variable 1", "Variable 2 ($)"), -->
+<!--       align = c("l", "c", "c"), -->
+<!--       linesep = "") %>% -->
+<!--   kable_styling(full_width = TRUE) %>% -->
+<!--   pack_rows("Industry", 1, 6) %>% -->
+<!--   pack_rows("Sex and marital status", 7, 9) %>% -->
+<!--   column_spec(1, width = "7cm") %>% -->
+<!--   column_spec(2, width = "4.75cm") %>% -->
+<!--   row_spec(0, bold = TRUE, -->
+<!--            extra_css = "border-top: 0; border-bottom:5px solid red;") -->
+<!-- ``` -->
+
+<!-- \urbnsource{Urban Institute Analysis of invented data.} -->
+
+<!-- \urbnboilerplate{The Urban Institute R Users Group}{April}{2018} -->
+
