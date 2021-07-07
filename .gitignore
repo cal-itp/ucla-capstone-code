@@ -173,3 +173,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Generated figures
+/reports/figures/**
+
+# MacOS files
+**/.DS_Store
+
+# Generated factsheets
+/reports/factsheets/**
